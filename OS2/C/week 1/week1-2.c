@@ -18,7 +18,7 @@ int main( void )
 
 void print_function ( char letter )
 {
-    for ( ctr = 0; ctr < 9; ctr++) 
+    for ( ctr = 0; ctr < 10; ctr++) 
     {
         printf("%c", letter);
     }
