@@ -1,13 +1,13 @@
 #include <stdio.h>
 
 void print_function( char letter );
-int ctr;
 
 int main( void )
 {
+    int ctr;
     char star = '*';
     char dash = '-';
-    for (ctr = 0 ; ctr < 10; ctr++ )
+    for (int ctr = 0 ; ctr < 10; ctr++ )
     {
         print_function( star );
         print_function( dash );
@@ -18,6 +18,7 @@ int main( void )
 
 void print_function ( char letter )
 {
+    int ctr;
     for ( ctr = 0; ctr < 10; ctr++) 
     {
         printf("%c", letter);
