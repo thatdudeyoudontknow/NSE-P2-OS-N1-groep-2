@@ -16,7 +16,7 @@ void shiftText(FILE *input, FILE *output) {
 
 int main() {
     FILE *inputFile, *outputFile;
-    char inputFileName[100], outputFileName[100];
+    char inputFileName[100], outputFileName[100], modifiedFileName[100];
 
     // Ask the user for the file name
     printf("Enter the file name (.txt): ");
@@ -29,15 +29,20 @@ int main() {
         return 1;
     }
 
-    // Generate the output file name by adding 'change' before the extension
+    // Generate the output file name by adding '-changed' before the extension
     char *dot = strrchr(inputFileName, '.');
     if (dot != NULL) {
         *dot = '\0';  // Remove the extension temporarily
     }
-    sprintf(outputFileName, "%schange%s", inputFileName, dot);
+    sprintf(modifiedFileName, "%s-changed", inputFileName);
+
+    // Concatenate the original extension to the modified file name
+    if (dot != NULL) {
+        strcat(modifiedFileName, dot);
+    }
 
     // Open the output file for writing
-    outputFile = fopen(outputFileName, "w");
+    outputFile = fopen(modifiedFileName, "w");
     if (outputFile == NULL) {
         printf("Could not create the output file.\n");
         fclose(inputFile);
@@ -51,7 +56,7 @@ int main() {
     fclose(inputFile);
     fclose(outputFile);
 
-    printf("Operation completed. The output file is %s.\n", outputFileName);
+    printf("Operation completed. The output file is %s.\n", modifiedFileName);
 
     return 0;
 }

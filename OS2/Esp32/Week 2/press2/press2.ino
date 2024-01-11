@@ -5,7 +5,7 @@
 #include "time.h"
 #include "esp_sntp.h"
 
-#define GPIO_LED 27
+#define GPIO_LED 2
 #define GPIO_BUTTONL 25
 #define GPIO_BUTTONR 26
 
@@ -54,6 +54,7 @@ void WiFi_connect() {
     // Wait for connection
     delay(500);
     Serial.print(".");
+    Serial.println(WiFi.SSID());
   }
   Serial.print("Connected to WiFi: ");
   Serial.println(WiFi.SSID());

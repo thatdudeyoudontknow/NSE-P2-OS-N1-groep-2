@@ -1,15 +1,18 @@
+// press2.ino 
+// MIT License (see file LICENSE)
+
 #include "time.h"
 
 // LED is active high
-#define GPIO_LED_SEM 2 
+#define GPIO_LED_SEM 14 
 #define GPIO_BUTTONL  27
 #define GPIO_BUTTONR  26
 
-#define DEBOUNCE_TIME  30 // the debounce time in milliseconds, increase this time if it still chatters
+#define DEBOUNCE_TIME  30 // the debounce time in millisecond, increase this time if it still chatters
 
-// Declare SemaphoreHandle
-SemaphoreHandle_t sem;
-
+//Declare SemaphoreHandle
+// static .........
+SemaphoreHandle_t xSemaphore = NULL;
 //
 // Button Debouncing task:
 //
@@ -24,7 +27,7 @@ static void debounce_task(void *argp) {
   // the following variables are unsigned longs because the time, measured in
   // milliseconds, will quickly become a bigger number than can be stored in an int.
   //https://esp32io.com/tutorials/esp32-button-debounce
-  unsigned long lastDebounceTime = 0;  // the last time the output pin was toggled
+  unsigned long lastDebounceTime = 0;  // the last time the output pin was tog
   
   for (;;) {
 
@@ -38,7 +41,7 @@ static void debounce_task(void *argp) {
     if (currentState != lastFlickerableState) {
       // reset the debouncing timer
       lastDebounceTime = millis();
-      // save the last flickerable state
+      // save the the last flickerable state
       lastFlickerableState = currentState;
     }
     if ((millis() - lastDebounceTime) > DEBOUNCE_TIME) {
@@ -55,35 +58,37 @@ static void debounce_task(void *argp) {
       else if(lastSteadyState == LOW && currentState == HIGH){
         printf("The button %d is released\r\n", button_gpio);
       }
-      // save the last steady state
+      // save the the last steady state
       lastSteadyState = currentState;
     }
     taskYIELD();
   }
 }
 
-// Function to blink GPIO_led_sem at a given rate (ms) for 10 times 
+// function blinks GPIO_led_sem in given rate(ms) for 10 times 
 void blink_sem_led(int rate){
 
-  // Set Semaphore and release the Semaphore when done
-  if (xSemaphoreTake(sem, portMAX_DELAY) == pdTRUE) {
+  //set Semaphore and when done relase the Semaphore
+  //......
     int count = 0;
-    printf("BLINK_SEM_LED, rate: %d\r\n", rate);
+    printf("BLINK_SEM_LED, rate: %d\r\n",rate );
 
     while (count<10){
-      digitalWrite(GPIO_LED_SEM, HIGH);
-      delay(rate);
-      digitalWrite(GPIO_LED_SEM, LOW);
-      delay(rate);
-      count++;
-    }
-
-    // Free Semaphore
-    xSemaphoreGive(sem);
+        digitalWrite(GPIO_LED_SEM,HIGH);
+        delay(rate);
+       digitalWrite(GPIO_LED_SEM,LOW);
+        delay(rate);
+        count++;
+    
   }
+  //free Semaphore
+  //......
 }
 
+
+//
 // Initialization:
+//
 void setup() {
   int app_cpu = xPortGetCoreID();
   static int left = GPIO_BUTTONL;
@@ -93,14 +98,13 @@ void setup() {
   
   delay(2000);          // Allow USB to connect
 
-  // Create a binary Semaphore and release the Semaphore
-  sem = xSemaphoreCreateBinary();
-  assert(sem);
-  xSemaphoreGive(sem);
-
-  pinMode(GPIO_LED_SEM, OUTPUT);
-  pinMode(GPIO_BUTTONL, INPUT_PULLUP);
-  pinMode(GPIO_BUTTONR, INPUT_PULLUP);
+  // create here binary Semaphore and release the Semaphore
+  // handle = binary semaphore.........
+  // free binarys semaphore........
+ 
+  pinMode(GPIO_LED_SEM,OUTPUT);
+  pinMode(GPIO_BUTTONL,INPUT_PULLUP);
+  pinMode(GPIO_BUTTONR,INPUT_PULLUP);
 
   rc = xTaskCreatePinnedToCore(
     debounce_task,
