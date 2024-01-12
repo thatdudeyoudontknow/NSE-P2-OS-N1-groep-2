@@ -8,8 +8,10 @@ WebServer server(80);
 const char* ssid = "MQTT";
 const char* password = "test0000";
 const int LEDPIN = 2;
+const int LEDRED = 4;
+const int LEDGREEN = 15;
 // Define the pins for the extra LEDs
-const int ledPins[] = {13,12,14,27,26,25,32,33,15,4}; 
+const int ledPins[] = {13,12,14,27,26,25,32,33}; 
 
 
 String htmlPage;
@@ -112,10 +114,17 @@ void saveToSPIFFS(const String& wallType, float averageSignalStrength, int numMe
 void setup() {
   Serial.begin(115200);
   pinMode(LEDPIN, OUTPUT);
-  
+  pinMode(LEDRED, OUTPUT);
   WiFi.begin(ssid, password);
   while (WiFi.status() != WL_CONNECTED) {
     delay(1000);
+    digitalWrite(LEDRED, HIGH);
+    delay(250);
+    digitalWrite(LEDRED, LOW);
+    delay(250);
+    digitalWrite(LEDRED, HIGH);
+    delay(250);
+    digitalWrite(LEDRED, LOW);
     Serial.println("Connecting to WiFi...");
   }
   Serial.println("Connected to WiFi");
