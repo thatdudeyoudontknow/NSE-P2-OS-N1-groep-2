@@ -1,0 +1,12 @@
+Wall Type: niks
+Average Signal Strength: -68.80 dBm
+Measurement 1: -70 dBm
+Measurement 2: -70 dBm
+Measurement 3: -70 dBm
+Measurement 4: -72 dBm
+Measurement 5: -72 dBm
+Measurement 6: -72 dBm
+Measurement 7: -67 dBm
+Measurement 8: -68 dBm
+Measurement 9: -69 dBm
+Measurement 10: -66 dBm

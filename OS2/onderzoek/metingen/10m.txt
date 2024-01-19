@@ -1,0 +1,12 @@
+Wall Type: 10m
+Average Signal Strength: -87.10 dBm
+Measurement 1: -87 dBm
+Measurement 2: -84 dBm
+Measurement 3: -87 dBm
+Measurement 4: -80 dBm
+Measurement 5: -83 dBm
+Measurement 6: -80 dBm
+Measurement 7: -82 dBm
+Measurement 8: -82 dBm
+Measurement 9: -82 dBm
+Measurement 10: -82 dBm

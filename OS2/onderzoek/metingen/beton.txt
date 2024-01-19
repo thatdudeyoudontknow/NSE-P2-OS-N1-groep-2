@@ -1,0 +1,12 @@
+Wall Type: beton
+Average Signal Strength: -49.10 dBm
+Measurement 1: -50 dBm
+Measurement 2: -50 dBm
+Measurement 3: -50 dBm
+Measurement 4: -50 dBm
+Measurement 5: -50 dBm
+Measurement 6: -50 dBm
+Measurement 7: -50 dBm
+Measurement 8: -49 dBm
+Measurement 9: -50 dBm
+Measurement 10: -50 dBm

@@ -1,0 +1,12 @@
+Wall Type: glas
+Average Signal Strength: -66.80 dBm
+Measurement 1: -68 dBm
+Measurement 2: -66 dBm
+Measurement 3: -66 dBm
+Measurement 4: -66 dBm
+Measurement 5: -69 dBm
+Measurement 6: -68 dBm
+Measurement 7: -67 dBm
+Measurement 8: -67 dBm
+Measurement 9: -67 dBm
+Measurement 10: -69 dBm

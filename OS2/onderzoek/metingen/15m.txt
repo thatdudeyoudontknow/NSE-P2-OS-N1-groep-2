@@ -1,0 +1,12 @@
+Wall Type: 15m
+Average Signal Strength: -85.10 dBm
+Measurement 1: -81 dBm
+Measurement 2: -82 dBm
+Measurement 3: -82 dBm
+Measurement 4: -82 dBm
+Measurement 5: -83 dBm
+Measurement 6: -82 dBm
+Measurement 7: -85 dBm
+Measurement 8: -85 dBm
+Measurement 9: -85 dBm
+Measurement 10: -85 dBm
