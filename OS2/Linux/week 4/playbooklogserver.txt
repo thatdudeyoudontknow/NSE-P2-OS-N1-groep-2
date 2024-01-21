@@ -1,0 +1,54 @@
+- name: Configureren Logserver munin
+  hosts: log
+  become: true
+
+  tasks:
+    - name: update packed cache
+      apt:
+        update_cache: yes
+
+    - name: Upgrade all packages
+      apt:
+        upgrade: yes
+
+    - name: install apache2
+      apt:
+        name: apache2
+
+    - name: installeer Munin
+      apt:
+        name: munin
+        state: present
+
+    - name: start munin service
+      service:
+        name: munin
+        state: started
+        enabled: yes
+
+    - name: Node toevoegen
+      blockinfile:
+        path: /etc/munin/munin.conf
+        marker: " {mark} Ansible Managed Block - Node toevoegen"
+        block: |
+
+          [man2]
+                  address 10.6.0.133
+
+    - name: permission munin
+      shell: sed -i 's/Require local/Require all granted/g' /etc/munin/apache24.conf && sed -i 's/Options None/Options FollowSymLinks SymLinksIfOwnerMatch/g' /etc/munin/apache24.conf
+
+      notify:
+        - Restart apache2
+        - Restart munin
+
+  handlers:
+    - name: Restart apache2
+      service:
+        name: apache2
+        state: restarted
+
+    - name: Restart munin
+      service:
+        name: munin
+        state: restarted
