@@ -65,7 +65,7 @@ echo "Inhoud van de id_rsa wordpress file is aangepast"
 
 
 # de directory van de playbooks aanmaken
-mkdir -p /etc/ansible/ansible_quickstart
+sudo mkdir -p /etc/ansible/ansible_quickstart
 
 # de playbooks downloaden
 url_playbookdocker="wget https://raw.githubusercontent.com/thatdudeyoudontknow/NSE-P2-OS-N1-groep-2/main/OS2/Linux/week%205/Playbookdocker.yaml"
@@ -73,7 +73,10 @@ url_playbookmain="wget https://raw.githubusercontent.com/thatdudeyoudontknow/NSE
 url_playbookwordpress="wget https://raw.githubusercontent.com/thatdudeyoudontknow/NSE-P2-OS-N1-groep-2/main/OS2/Linux/week%205/Playbookwordpress.yaml"
 # Dit is waar de playbooks komen te staan
 cd /etc/ansible/ansible_quickstart || exit
-wget -q "$url_playbookdocker" -O Playbookdocker.yaml
-wget -q "$url_playbookmain" -O Playbookmain.yaml
-wget -q "$url_playbookwordpress" -O Playbookwordpress.yaml
-
+sudo wget -q "$url_playbookdocker" -O Playbookdocker.yaml
+sudo wget -q "$url_playbookmain" -O Playbookmain.yaml
+sudo wget -q "$url_playbookwordpress" -O Playbookwordpress.yaml
+echo "playbooks zijn gedownload"
+echo "starten van de playbooks"
+# de playbooks aanroepen
+sudo ansible-playbook /etc/ansible/ansible_quickstart/Playbookdocker.yaml
