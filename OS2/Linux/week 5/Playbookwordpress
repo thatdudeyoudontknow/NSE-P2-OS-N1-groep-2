@@ -1,0 +1,94 @@
+- name: Configure syslog-ng, Apache2 & munin-node
+  hosts: man2
+  become: true
+
+  tasks:
+    - name: update packed cache
+      apt:
+        update_cache: yes
+
+    - name: Upgrade all packages
+      apt:
+        upgrade: yes
+
+    - name: Instaleer apache2
+      apt:
+        name: apache2
+
+    - name: Installeer syslog-ng
+      apt:
+        name: syslog-ng
+
+    - name: instaleer Munin-node
+      apt:
+        name: munin-node
+
+      tags:
+        - syslog-ng
+
+    - name: Configureer Munin-node
+      blockinfile:
+        path: /etc/munin/munin-node.conf
+        marker: "# {mark} Ansible Managed Node - syslog-ng"
+        block: |
+
+          allow ^10.6.0.101$
+          host_name wordpress
+
+    - name: Configureer syslog-ng
+      blockinfile:
+        path: /etc/syslog-ng/syslog-ng.conf
+        marker: "# {mark} ANSIBLE MANAGED BLOCK - syslog-ng"
+        block: |
+
+          source s_apache {
+            file("/var/log/apache2/access.log" flags(no-parse));
+            file("/var/log/apache2/error.log"  flags(no-parse));
+          };
+          destination d_net {
+            tcp("10.6.0.5" port(514));
+          };
+
+          destination d_logs {
+            file("/var/log/syslog-ng");
+          };
+
+
+          log {
+            source(s_apache);
+            destination(d_logs);
+          };
+          log {
+            destination(d_logs);
+            destination(d_logs);
+          };
+          log {
+            source(s_src);
+            destination(d_net);
+          };
+      notify:
+        - Restart syslog-ng
+        - Restart Apache2
+        - Print Message
+        - Restart Munin
+      tags:
+        - syslog-ng
+
+  handlers:
+    - name: Restart Apache2
+      service:
+        name: apache2
+        state: restarted
+
+    - name: Restart syslog-ng
+      service:
+        name: syslog-ng
+        state: restarted
+
+    - name: Restart Munin
+      service:
+        name: munin-node
+        state: restarted
+
+    - name: Print Message
+      shell: echo "klaar voor gebruik!"
