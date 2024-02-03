@@ -30,10 +30,10 @@ docker_host ansible_python_interperter=/usr/bin/python3"
 
 
 # dit is waat de hostsfile staat
-hosts_bestand="etc/ansible/hosts"
+hosts_bestand="/etc/ansible/hosts"
 
 # inhoud toevoegen aan hosts file met sudo rechten
-echo -e "$hosts_inhoud" | sudo tee -a "$hosts_bestand" > /dev/null
+echo "$hosts_inhoud" | sudo tee -a "$hosts_bestand" > /dev/null
 
 #controle echo
 echo "Inhoud van de hosts file is aangepast"
@@ -68,9 +68,9 @@ echo "Inhoud van de id_rsa wordpress file is aangepast"
 sudo mkdir -p /etc/ansible/ansible_quickstart
 
 # de playbooks downloaden
-url_playbookdocker="wget https://raw.githubusercontent.com/thatdudeyoudontknow/NSE-P2-OS-N1-groep-2/main/OS2/Linux/week%205/Playbookdocker.yaml"
-url_playbookmain="wget https://raw.githubusercontent.com/thatdudeyoudontknow/NSE-P2-OS-N1-groep-2/main/OS2/Linux/week%205/Playbookmain.yaml"
-url_playbookwordpress="wget https://raw.githubusercontent.com/thatdudeyoudontknow/NSE-P2-OS-N1-groep-2/main/OS2/Linux/week%205/Playbookwordpress.yaml"
+url_playbookdocker="https://raw.githubusercontent.com/thatdudeyoudontknow/NSE-P2-OS-N1-groep-2/main/OS2/Linux/week%205/Playbookdocker.yaml"
+url_playbookmain="https://raw.githubusercontent.com/thatdudeyoudontknow/NSE-P2-OS-N1-groep-2/main/OS2/Linux/week%205/Playbookmain.yaml"
+url_playbookwordpress="https://raw.githubusercontent.com/thatdudeyoudontknow/NSE-P2-OS-N1-groep-2/main/OS2/Linux/week%205/Playbookwordpress.yaml"
 # Dit is waar de playbooks komen te staan
 cd /etc/ansible/ansible_quickstart || exit
 sudo wget -q "$url_playbookdocker" -O Playbookdocker.yaml
