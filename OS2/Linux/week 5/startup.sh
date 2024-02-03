@@ -30,7 +30,7 @@ echo -e "$hosts_inhoud" | sudo tee -a "$hosts_bestand" > /dev/null
 
 #controle echo
 echo "Inhoud van de hosts file is aangepast"
-exit 0
+
 
 #private key van wordpress
 url_wordpress="https://github.com/thatdudeyoudontknow/NSE-P2-OS-N1-groep-2/raw/main/OS2/Linux/week%204/new_keys/pri_wordpress"
@@ -41,7 +41,7 @@ wget -q "$url_wordpress" -O id_rsa_wordpress
 
 chmod 777 id_rsa_wordpress
 echo "priv key wordpress op unix getjubet" 
-exit 0
+
 
 #private key van docker
 url_docker="https://github.com/thatdudeyoudontknow/NSE-P2-OS-N1-groep-2/raw/main/OS2/Linux/week%204/new_keys/pri_docker"
@@ -52,11 +52,10 @@ wget -q "$url_docker" -O id_rsa_docker
 
 chmod 777 id_rsa_docker
 echo "priv key docker op unix getjubet" 
-exit 0
 
 #controle echo
 echo "Inhoud van de id_rsa wordpress file is aangepast"
-exit 0
+
 
 # de directory van de playbooks aanmaken
 mkdir -p etc/ansible/ansible_quickstart
