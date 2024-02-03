@@ -5,7 +5,7 @@
 sudo apt-get update
 
 sudo apt-get upgrade -y
-
+sudo apt-get install nano -y
 # Op deze server moet ansible komen.
 sudo apt-get install ansible -y
 
