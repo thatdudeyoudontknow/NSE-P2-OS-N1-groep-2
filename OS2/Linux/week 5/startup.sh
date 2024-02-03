@@ -65,7 +65,7 @@ echo "Inhoud van de id_rsa wordpress file is aangepast"
 
 
 # de directory van de playbooks aanmaken
-mkdir -p etc/ansible/ansible_quickstart
+mkdir -p /etc/ansible/ansible_quickstart
 
 # de playbooks downloaden
 url_playbookdocker="wget https://raw.githubusercontent.com/thatdudeyoudontknow/NSE-P2-OS-N1-groep-2/main/OS2/Linux/week%205/Playbookdocker.yaml"
