@@ -1,5 +1,4 @@
-localadmin@00-ITV2N1-Groep1-con:/etc/ansible/ansible_quickstart$ cat playbooksyslog.yaml 
-- name: Configure syslog-ng & Apache2
+- name: Configure syslog-ng, Apache2 & munin-node
   hosts: man2
   become: true
 
