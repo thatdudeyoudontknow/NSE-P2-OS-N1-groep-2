@@ -27,7 +27,7 @@ docker_host=10.6.0.136\n
 docker_host ansible_ssh_private_key_file=~/.ssh/id_rsa_docker\n
 docker_host ansible_python_interperter=/usr/bin/python3"
 
-mkdir -p etc/ansible/host
+
 
 # dit is waat de hostsfile staat
 hosts_bestand="etc/ansible/hosts"
