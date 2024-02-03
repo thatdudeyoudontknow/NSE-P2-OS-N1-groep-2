@@ -1,0 +1,65 @@
+- hosts: docker_host
+  become: yes
+  tasks:
+    - name: Update apt and install required packages
+      apt:
+        name: "{{ item }}"
+        state: present
+        update_cache: yes
+      loop:
+        - apt-transport-https
+        - ca-certificates
+        - curl
+        - software-properties-common
+
+    - name: Add Docker GPG apt Key
+      apt_key:
+        url: https://download.docker.com/linux/ubuntu/gpg
+        state: present
+
+    - name: Add Docker Repository
+      apt_repository:
+        repo: deb [arch=amd64] https://download.docker.com/linux/ubuntu focal stable
+        state: present
+
+    - name: Update apt and install docker-ce
+      apt:
+        name: docker-ce
+        state: present
+        update_cache: yes
+
+    - name: Ensure docker service is running
+      systemd:
+        name: docker
+        state: started
+
+    - name: Add user to docker group
+      user:
+        name: "{{ ansible_user }}"
+        groups: docker
+        append: yes
+
+    - name: Run hello-world docker container
+      docker_container:
+        name: hello-world
+        image: hello-world
+        state: started
+
+    - name: Pull ubuntu docker image
+      docker_image:
+        name: ubuntu
+        source: pull
+
+    - name: Run ubuntu docker container
+      docker_container:
+        name: ubuntu-container
+        image: ubuntu
+        state: started
+        interactive: yes
+    - name: Display logs of ubuntu docker container
+      command: docker logs ubuntu-container
+      register: log_output
+
+    - name: Display log output
+      debug:
+        var: log_output.stdout_lines
