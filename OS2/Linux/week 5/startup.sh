@@ -26,24 +26,26 @@ ssh-add /home/localadmin/.ssh/id_rsa_docker
 
 # Dit moet ook geconfigureerd worden. we beginnen met de host file
 #inhoud hostsfile
+#!/bin/bash
+
 hosts_inhoud="[servers]
 wordpress_host ansible_host=10.6.0.100
 wordpress_host ansible_ssh_private_key_file=~/.ssh/id_rsa_wordpress
-wordpress_host ansible_python_interperter=/usr/bin/python3
+wordpress_host ansible_python_interpreter=/usr/bin/python3
 docker_host ansible_host=10.6.0.136
 docker_host ansible_ssh_private_key_file=~/.ssh/id_rsa_docker
-docker_host ansible_python_interperter=/usr/bin/python3"
+docker_host ansible_python_interpreter=/usr/bin/python3"
 
+inventory_file="/path/to/your/inventory"
 
-
-# dit is waat de hostsfile staat
-hosts_bestand="/etc/ansible/hosts"
-
-# inhoud toevoegen aan hosts file met sudo rechten
-echo "$hosts_inhoud" | sudo tee -a "$hosts_bestand" > /dev/null
-
-#controle echo
-echo "Inhoud van de hosts file is aangepast"
+# Controleer of de hosts al in het inventory-bestand staan
+if grep -q "$hosts_inhoud" "$inventory_file"; then
+    echo "De hosts zijn al toegevoegd aan het inventory-bestand."
+else
+    # Voeg de hosts toe aan het inventory-bestand
+    echo "$hosts_inhoud" >> "$inventory_file"
+    echo "De hosts zijn succesvol toegevoegd aan het inventory-bestand."
+fi
 
 
 #private key van wordpress
