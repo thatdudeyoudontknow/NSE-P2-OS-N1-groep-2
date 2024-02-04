@@ -58,25 +58,24 @@
               source(s_apache);
               destination(d_net);
             };
-        become: yes
-      - name: Configure syslog-ng for Munin
-        blockinfile:
-          path: /etc/syslog-ng/syslog-ng.conf
-          marker: "# {mark} ANSIBLE MANAGED BLOCK - munin"
-          block: |
-            source s_munin {
-              file("/var/log/munin/munin-node.log" flags(no-parse));
-              file("/var/log/munin/munin-update.log" flags(no-parse));
-            };
-            log {
-              source(s_munin);
-              destination(d_logs);
-            };
-            log {
-              source(s_munin);
-              destination(d_net);
-            };
-        become: yes
+
+       - name: Configure syslog-ng for Munin
+         blockinfile:
+           path: /etc/syslog-ng/syslog-ng.conf
+           marker: "# {mark} ANSIBLE MANAGED BLOCK - munin"
+           block: |
+             source s_munin {
+               file("/var/log/munin/munin-node.log" flags(no-parse));
+               file("/var/log/munin/munin-update.log" flags(no-parse));
+             };
+             log {
+               source(s_munin);
+               destination(d_logs);
+             };
+             log {
+               source(s_munin);
+               destination(d_net);
+             };
       notify:
         - Restart syslog-ng
         - Restart Apache2
