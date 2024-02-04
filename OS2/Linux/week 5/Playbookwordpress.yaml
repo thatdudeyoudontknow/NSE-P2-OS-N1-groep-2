@@ -41,15 +41,16 @@
         marker: "# {mark} ANSIBLE MANAGED BLOCK - remote logging"
         block: |
           source s_local {
-            system();
-            internal();
+            
             file("/var/log/apache2/access.log" flags(no-parse));
             file("/var/log/apache2/error.log" flags(no-parse));
             file("/var/log/munin/munin-node.log" flags(no-parse));
             file("/var/log/munin/munin-update.log" flags(no-parse));
             file("/var/log/syslog" flags(no-parse));
           };
-
+          destination d_net {
+            tcp("10.6.0.5" port(514));
+          };
           log {
             source(s_local);
             destination(d_net);
