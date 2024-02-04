@@ -26,11 +26,11 @@ ssh-add /home/localadmin/.ssh/id_rsa_docker
 
 #inhoud van de hosts
 hosts_inhoud="[servers]
-wordpress_host ansible_user=localhost
+wordpress_host ansible_user=localadmin
 wordpress_host ansible_host=10.6.0.100
 wordpress_host ansible_ssh_private_key_file=/home/localadmin/.ssh/id_rsa_wordpress
 wordpress_host ansible_python_interpreter=/usr/bin/python3
-docker_host ansible_user=localhost
+docker_host ansible_user=localadmin
 docker_host ansible_host=10.6.0.136
 docker_host ansible_ssh_private_key_file=/home/localadmin/.ssh/id_rsa_docker
 docker_host ansible_python_interpreter=/usr/bin/python3"
