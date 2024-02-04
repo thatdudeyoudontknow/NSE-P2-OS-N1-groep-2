@@ -52,7 +52,7 @@ url_wordpress="https://github.com/thatdudeyoudontknow/NSE-P2-OS-N1-groep-2/raw/m
 cd /home/localadmin/.ssh || exit
 wget -q "$url_wordpress" -O id_rsa_wordpress
 
-chmod 600 .ssh/id_rsa_wordpress
+chmod 600 /home/localadmin/.ssh/id_rsa_wordpress
 echo "priv key wordpress op unix getjubet" 
 
 
@@ -63,7 +63,7 @@ url_docker="https://raw.githubusercontent.com/thatdudeyoudontknow/NSE-P2-OS-N1-g
 cd /home/localadmin/.ssh || exit
 wget -q "$url_docker" -O id_rsa_docker
 
-chmod 600 .ssh/id_rsa_docker
+chmod 600 /home/localadmin/.ssh/id_rsa_docker
 echo "priv key docker op unix getjubet" 
 
 #controle echo
