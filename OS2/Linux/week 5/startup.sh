@@ -24,18 +24,14 @@ eval "$(ssh-agent -s)"
 ssh-add /home/localadmin/.ssh/id_rsa_wordpress
 ssh-add /home/localadmin/.ssh/id_rsa_docker
 
-# inhoud van de hosts file
-
-# Installeer pip
-sudo apt-get install python3-pip -y
-
-# Inhoud van de hostsfile
+#inhoud van de hosts
 hosts_inhoud="[servers]
 wordpress_host ansible_host=10.6.0.100
-wordpress_host ansible_ssh_private_key_file=~/.ssh/id_rsa_wordpress
+wordpress_host ansible_ssh_private_key_file=/home/localadmin/.ssh/id_rsa_wordpress
 wordpress_host ansible_python_interpreter=/usr/bin/python3
+ansible_user=localhost
 docker_host ansible_host=10.6.0.136
-docker_host ansible_ssh_private_key_file=~/.ssh/id_rsa_docker
+docker_host ansible_ssh_private_key_file=/home/localadmin/.ssh/id_rsa_docker
 docker_host ansible_python_interpreter=/usr/bin/python3"
 
 # Dit is waar de hostsfile staat
@@ -59,18 +55,18 @@ url_wordpress="https://github.com/thatdudeyoudontknow/NSE-P2-OS-N1-groep-2/raw/m
 cd /home/localadmin/.ssh || exit
 wget -q "$url_wordpress" -O id_rsa_wordpress
 
-chmod 600 /home/localadmin/.ssh/id_rsa_wordpress
+chmod 600 .ssh/id_rsa_wordpress
 echo "priv key wordpress op unix getjubet" 
 
 
 #private key van docker
-url_docker="https://raw.githubusercontent.com/thatdudeyoudontknow/NSE-P2-OS-N1-groep-2/main/OS2/Linux/week%204/new_keys/priv%20managed1"
+url_docker="https://github.com/thatdudeyoudontknow/NSE-P2-OS-N1-groep-2/raw/main/OS2/Linux/week%204/new_keys/pri_docker"
 
 # Dit is waar de id_rsa_docker file staat
 cd /home/localadmin/.ssh || exit
 wget -q "$url_docker" -O id_rsa_docker
 
-chmod 600 /home/localadmin/.ssh/id_rsa_docker
+chmod 600 .ssh/id_rsa_docker
 echo "priv key docker op unix getjubet" 
 
 #controle echo
