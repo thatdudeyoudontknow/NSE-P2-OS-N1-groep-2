@@ -35,29 +35,28 @@
           allow ^10.6.0.135$
           host_name docker
 
-    - name: Configure syslog-ng
+    - name: Configure syslog-ng for remote logging
       blockinfile:
         path: /etc/syslog-ng/syslog-ng.conf
-        marker: "# {mark} ANSIBLE MANAGED BLOCK - syslog-ng"
+        marker: "# {mark} ANSIBLE MANAGED BLOCK - remote logging"
         block: |
-          source s_apache {
+          source s_local {
+            system();
+            internal();
             file("/var/log/apache2/access.log" flags(no-parse));
-            file("/var/log/apache2/error.log"  flags(no-parse));
+            file("/var/log/apache2/error.log" flags(no-parse));
+            file("/var/log/munin/munin-node.log" flags(no-parse));
+            file("/var/log/munin/munin-update.log" flags(no-parse));
+            file("/var/log/syslog" flags(no-parse));
           };
           destination d_net {
             tcp("10.6.0.5" port(514));
           };
-          destination d_logs {
-            file("/var/log/syslog-ng");
-          };
           log {
-            source(s_apache);
-            destination(d_logs);
-          };
-          log {
-            source(s_apache);
+            source(s_local);
             destination(d_net);
           };
+
 
     - name: Configure syslog-ng for Munin
       blockinfile:
@@ -68,9 +67,8 @@
             file("/var/log/munin/munin-node.log" flags(no-parse));
             file("/var/log/munin/munin-update.log" flags(no-parse));
           };
-          log {
-            source(s_munin);
-            destination(d_logs);
+          destination d_net {
+            tcp("10.6.0.5" port(514));
           };
           log {
             source(s_munin);
@@ -78,12 +76,25 @@
           };
       notify:
         - Restart syslog-ng
-        - Restart Apache2
-        - Print Message
-        - Restart Munin
       tags:
         - syslog-ng
-
+    - name: Configure syslog-ng for system logs
+      blockinfile:
+        path: /etc/syslog-ng/syslog-ng.conf
+        marker: "# {mark} ANSIBLE MANAGED BLOCK - system logs"
+        block: |
+          source s_system {
+            system();
+            internal();
+          };
+          destination d_net {
+            tcp("10.6.0.5" port(514));
+          };
+          log {
+            source(s_system);
+            destination(d_net);
+          };
+      
   handlers:
     - name: Restart Apache2
       service:

@@ -44,7 +44,34 @@
       notify:
         - Restart apache2
         - Restart munin
+    - name: Configure syslog-ng for local logs
+      blockinfile:
+        path: /etc/syslog-ng/syslog-ng.conf
+        marker: "# {mark} ANSIBLE MANAGED BLOCK - local logs"
+        block: |
+          source s_local {
+            system();
+            internal();
+            file("/var/log/apache2/access.log" flags(no-parse));
+            file("/var/log/apache2/error.log" flags(no-parse));
+            file("/var/log/munin/munin-node.log" flags(no-parse));
+            file("/var/log/munin/munin-update.log" flags(no-parse));
+            file("/var/log/syslog" flags(no-parse));
+          };
+          destination d_logs {
+            file("/var/log/syslog-ng");
+          };
+          log {
+            source(s_local);
+            destination(d_logs);
+          };
+    - name: Restart syslog-ng service
+      service:
+        name: syslog-ng
+        state: restarted
+      become: yes
 
+      
   handlers:
     - name: Restart apache2
       service:
