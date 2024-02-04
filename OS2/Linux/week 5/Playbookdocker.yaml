@@ -69,6 +69,11 @@
     - name: Display log output
       debug:
         var: log_output.stdout_lines
+   
+    - name: Set Docker tag
+      set_fact:
+        docker_tag: "{{ '{{' }}.ImageName{{ '}}' }}/{{ '{{' }}.Name{{ '}}' }}/{{ '{{' }}.ID{{ '}}' }}"
+
     - name: Configure Docker to use syslog-ng
       copy:
         dest: /etc/docker/daemon.json
@@ -77,7 +82,7 @@
             "log-driver": "syslog",
             "log-opts": {
               "syslog-address": "tcp://10.6.0.5:514",
-              "tag": "{{'{{'}}.ImageName{{'}}'}}/{{'{{'}}.Name{{'}}'}}/{{'{{'}}.ID{{'}}'}}"
+              "tag": "{{ docker_tag }}"
             }
           }
         owner: root
