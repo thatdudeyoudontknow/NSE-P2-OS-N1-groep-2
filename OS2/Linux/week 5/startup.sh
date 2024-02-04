@@ -103,7 +103,7 @@ git clone "$github_repo" "$clone_directory"
 # klein berichtje dat het is gelukt. 
 echo "Repository is gekloond naar $clone_directory"
 
-sudo ansible-playbook /home/localadmin/mapie/playbook.yaml
+sudo ansible-playbook /home/mapie/playbook.yaml
 
 echo "playbooks zijn aangeroepen"
 echo "einde van het script"
