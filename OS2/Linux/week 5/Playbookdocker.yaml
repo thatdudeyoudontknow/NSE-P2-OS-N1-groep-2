@@ -21,7 +21,10 @@
       apt_repository:
         repo: deb [arch=amd64] https://download.docker.com/linux/ubuntu focal stable
         state: present
-
+    - name: Install Docker Python library
+      pip:
+        name: docker
+        state: present
     - name: Update apt and install docker-ce
       apt:
         name: docker-ce
