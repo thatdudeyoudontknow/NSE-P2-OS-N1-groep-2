@@ -1,0 +1,20 @@
+  # This section is used for connect to server
+  # name - this field is used for naming task
+  # hosts - in this field we are define hostname/server, in which we want to connect
+  # remote_user - this field define user, which we want to use for connect into server
+  # become - because we dont want to use root user, we must use sudo privilleges and for this we must set value "yes"
+  
+- name : Connecting to server  
+  hosts: 10.6.0.137
+  remote_user: localadmin
+  become: yes
+
+
+  # This section is used for define all tasks, which we want to do.
+  # roles - there we have defined "sections", which will be used.
+
+  roles: 
+    - server
+    - php
+    - mysql
+    - wordpress

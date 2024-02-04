@@ -1,0 +1,13 @@
+---
+# In this file we define all task, which are required for our installation of WordPress
+# name - define name of task
+# become - we need sudo privileges, so we set for this field value "yes"
+# apt - This define command, which we want to use - because we are using Ubuntu 20.04, i choose "apt"
+
+- name: Installing additional extensions for PHP
+  become: yes
+  apt:
+    name: 
+      - php-mysql
+      - php-curl
+      - libapache2-mod-php  

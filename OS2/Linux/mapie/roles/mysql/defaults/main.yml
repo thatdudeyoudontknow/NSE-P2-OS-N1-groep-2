@@ -1,0 +1,6 @@
+---
+# This file just define default values for create or use MySQL user & database for this training.
+
+mysql_database: td_wordpress
+mysql_user: td_wordpress
+mysql_password: 7Urz3g89

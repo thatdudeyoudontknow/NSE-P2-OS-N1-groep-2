@@ -1,0 +1,5 @@
+---
+# This is last step, which restart apache for start wordpress installation
+- name: restart apache
+  service: name=apache2 state=restarted
+  become: yes

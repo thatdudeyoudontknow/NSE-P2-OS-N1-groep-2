@@ -1,0 +1,21 @@
+---
+# In this file we create new mysql database and new user, who had full privileges for database
+# Credentials, which we want to use we are defined in mysql/defaults/main.yml
+# name - define name of task
+# become - we need sudo privileges, so we set for this field value "yes"
+# mysql_db - here we define name of new database
+
+- name: Create mysql database
+  become: yes
+  mysql_db: name={{ mysql_database }}
+
+# name - define name of task
+# become - we need sudo privileges, so we set for this field value "yes"
+# mysql_user - In this task we create new user with defined password and after we grant access for new database.
+
+- name: Create mysql user
+  become: yes
+  mysql_user: 
+    name={{ mysql_user }} 
+    password={{ mysql_password }} 
+    priv=*.*:ALL

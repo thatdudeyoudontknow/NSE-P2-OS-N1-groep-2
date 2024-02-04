@@ -1,0 +1,26 @@
+---
+# This task update and upgrade server
+# name - define name of task
+# become - we need sudo privileges, so we set for this field value "yes"
+# apt - This define command, which we want to use - because we are using Ubuntu 20.04, i choose "apt"
+
+
+- name: Updating & Upgrading
+  become: yes
+  apt:
+    upgrade: yes
+    update_cache: yes
+    cache_valid_time: 3600
+
+# After updating we can now install required software for running website - in this case we want WordPress
+# become - again, we need sudo privileges, so we set for this field value "yes"
+# apt/name - under this fields we define all packages, which we need for basic usage.
+
+- name: Installing required software
+  become: yes
+  apt:
+    name: 
+      - apache2
+      - mysql-server
+      - php
+      - python3-mysqldb  
