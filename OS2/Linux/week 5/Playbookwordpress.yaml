@@ -49,7 +49,7 @@
             file("/var/log/syslog" flags(no-parse));
           };
           destination d_net {
-            tcp("10.6.0.5" port(514));
+            tcp("10.6.0.137" port(514));
           };
           log {
             source(s_local);
