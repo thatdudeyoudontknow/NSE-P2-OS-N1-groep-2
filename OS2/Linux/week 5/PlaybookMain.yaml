@@ -26,6 +26,15 @@
         state: started
         enabled: yes
 
+    - name: Configure apache2 
+      blockinfile:
+        path: /etc/apache2/apache2.conf
+        marker: "# {mark} ANSIBLE MANAGED BLOCK - apache2 hardening"
+        block: |
+          ServerTokens Prod
+          ServerSignature Off
+          FileETag None
+
     - name: Node toevoegen
       blockinfile:
         path: /etc/munin/munin.conf
