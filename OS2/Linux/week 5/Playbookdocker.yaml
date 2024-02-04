@@ -78,7 +78,7 @@
           {
             "log-driver": "syslog",
             "log-opts": {
-              "syslog-address": "tcp://10.6.0.23:514",
+              "syslog-address": "tcp://10.6.0.6:514",
               "syslog-facility": "local0"
             }
           }
