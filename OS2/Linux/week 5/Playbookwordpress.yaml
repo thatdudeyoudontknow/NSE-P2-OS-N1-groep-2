@@ -49,9 +49,7 @@
             file("/var/log/munin/munin-update.log" flags(no-parse));
             file("/var/log/syslog" flags(no-parse));
           };
-          destination d_net {
-            tcp("10.6.0.5" port(514));
-          };
+
           log {
             source(s_local);
             destination(d_net);
@@ -67,9 +65,7 @@
             file("/var/log/munin/munin-node.log" flags(no-parse));
             file("/var/log/munin/munin-update.log" flags(no-parse));
           };
-          destination d_net {
-            tcp("10.6.0.5" port(514));
-          };
+          
           log {
             source(s_munin);
             destination(d_net);
@@ -83,17 +79,11 @@
         path: /etc/syslog-ng/syslog-ng.conf
         marker: "# {mark} ANSIBLE MANAGED BLOCK - system logs"
         block: |
-          source s_system {
-            system();
-            internal();
-          };
-          destination d_net {
-            tcp("10.6.0.5" port(514));
-          };
+
           log {
-            source(s_system);
+            source(s_src);
             destination(d_net);
-          };
+              };
       
   handlers:
     - name: Restart Apache2
