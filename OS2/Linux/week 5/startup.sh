@@ -9,7 +9,7 @@ sudo apt-get upgrade -y
 sudo apt-get install nano -y
 
 # voor het de github later
-sudo apt-get  install subversion -y
+sudo apt-get install install git -y
 
 #map ansible/ansible aanmaken
 sudo apt-add-repository ppa:ansible/ansible -y
@@ -98,21 +98,11 @@ sudo ansible-playbook /etc/ansible/ansible_quickstart/Playbookdocker.yaml
 sudo ansible-playbook /etc/ansible/ansible_quickstart/Playbookwordpress.yaml
 
 # GitHub-map URL
-github_map_url="https://github.com/thatdudeyoudontknow/NSE-P2-OS-N1-groep-2/trunk/OS2/Linux/week%205/mapie"
+git clone https://github.com/thatdudeyoudontknow/NSE-P2-OS-N1-groep-2.git
 
-# Directory waar de map moet worden uitgepakt
-destination_directory="/home/localadmin/mapie"
 
-# Haal alleen de map op vanaf GitHub
-svn export "$github_map_url" "$destination_directory"
 
-# Optioneel: Voer andere bewerkingen uit na het ophalen van de map, indien nodig
-# Bijvoorbeeld: Installeer vereiste afhankelijkheden, configureer de applicatie, voer tests uit, enz.
-
-# Laat een bericht zien om aan te geven dat het ophalen is voltooid
-echo "Mapie is opgehaald naar $destination_directory"
-
-sudo ansible-playbook /home/localadmin/mapie/playbook.yaml
+sudo ansible-playbook /home/localadmin/NSE-P2-OS-N1-groep-2/OS2/Linux/week\ 5/mapie/playbook.yaml
 
 
 echo "playbooks zijn aangeroepen"
