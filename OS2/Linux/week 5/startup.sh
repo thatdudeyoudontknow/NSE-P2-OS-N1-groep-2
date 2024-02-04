@@ -31,12 +31,12 @@ sudo apt-get install python3-pip -y
 
 # Inhoud van de hostsfile
 hosts_inhoud="[servers]
-wordpress_host=10.6.0.100
+wordpress_host ansible_host=10.6.0.100
 wordpress_host ansible_ssh_private_key_file=~/.ssh/id_rsa_wordpress
-wordpress_host ansible_python_interperter=/usr/bin/python3
-docker_host=10.6.0.136
+wordpress_host ansible_python_interpreter=/usr/bin/python3
+docker_host ansible_host=10.6.0.136
 docker_host ansible_ssh_private_key_file=~/.ssh/id_rsa_docker
-docker_host ansible_python_interperter=/usr/bin/python3"
+docker_host ansible_python_interpreter=/usr/bin/python3"
 
 # Dit is waar de hostsfile staat
 hosts_bestand="/etc/ansible/hosts"
