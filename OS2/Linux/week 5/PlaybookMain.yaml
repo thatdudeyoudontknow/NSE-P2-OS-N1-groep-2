@@ -59,8 +59,6 @@
         marker: "# {mark} ANSIBLE MANAGED BLOCK - local logs"
         block: |
           source s_local {
-            system();
-            internal();
             file("/var/log/apache2/access.log" flags(no-parse));
             file("/var/log/apache2/error.log" flags(no-parse));
             file("/var/log/munin/munin-node.log" flags(no-parse));
@@ -80,7 +78,6 @@
         state: restarted
       become: yes
 
-      
   handlers:
     - name: Restart apache2
       service:
