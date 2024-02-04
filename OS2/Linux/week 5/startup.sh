@@ -79,7 +79,7 @@ sudo mkdir -p /etc/ansible/ansible_quickstart
 
 # de playbooks downloaden
 url_playbookdocker="https://raw.githubusercontent.com/thatdudeyoudontknow/NSE-P2-OS-N1-groep-2/main/OS2/Linux/week%205/Playbookdocker.yaml"
-url_playbookmain="https://raw.githubusercontent.com/thatdudeyoudontknow/NSE-P2-OS-N1-groep-2/main/OS2/Linux/week%205/Playbookmain.yaml"
+url_playbookmain="https://raw.githubusercontent.com/thatdudeyoudontknow/NSE-P2-OS-N1-groep-2/main/OS2/Linux/week%205/PlaybookMain.yaml"
 url_playbookwordpress="https://raw.githubusercontent.com/thatdudeyoudontknow/NSE-P2-OS-N1-groep-2/main/OS2/Linux/week%205/Playbookwordpress.yaml"
 # Dit is waar de playbooks komen te staan
 cd /etc/ansible/ansible_quickstart || exit
