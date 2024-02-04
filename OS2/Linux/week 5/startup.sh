@@ -17,6 +17,13 @@ sudo apt-get install ansible -y
 # we moeten pip installeren om de juiste python te gebruiken
 sudo apt-get install pip -y
 
+# Start the ssh-agent in the background
+eval "$(ssh-agent -s)"
+
+# Add your private key to the ssh-agent
+ssh-add /home/localadmin/.ssh/id_rsa_wordpress
+ssh-add /home/localadmin/.ssh/id_rsa_docker
+
 # Dit moet ook geconfigureerd worden. we beginnen met de host file
 #inhoud hostsfile
 hosts_inhoud="[servers]
