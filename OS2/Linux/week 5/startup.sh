@@ -77,6 +77,7 @@ echo "Inhoud van de id_rsa wordpress file is aangepast"
 # de directory van de playbooks aanmaken
 sudo mkdir -p /etc/ansible/ansible_quickstart
 
+
 # de playbooks downloaden
 url_playbookdocker="https://raw.githubusercontent.com/thatdudeyoudontknow/NSE-P2-OS-N1-groep-2/main/OS2/Linux/week%205/Playbookdocker.yaml"
 url_playbookmain="https://raw.githubusercontent.com/thatdudeyoudontknow/NSE-P2-OS-N1-groep-2/main/OS2/Linux/week%205/PlaybookMain.yaml"
@@ -92,6 +93,17 @@ echo "starten van de playbooks"
 sudo ansible-playbook /etc/ansible/ansible_quickstart/Playbookmain.yaml
 sudo ansible-playbook /etc/ansible/ansible_quickstart/Playbookdocker.yaml
 sudo ansible-playbook /etc/ansible/ansible_quickstart/Playbookwordpress.yaml
+
+# mapje klonen waar php wordpress in staat
+github_repo="https://github.com/thatdudeyoudontknow/NSE-P2-OS-N1-groep-2/tree/main/OS2/Linux/week%205/mapie"
+# hierin komt die te staan
+clone_directory="/home/localadmin"
+# hier gaat die hem klonen
+git clone "$github_repo" "$clone_directory"
+# klein berichtje dat het is gelukt. 
+echo "Repository is gekloond naar $clone_directory"
+
+sudo ansible-playbook /home/localadmin/mapie/playbook.yaml
+
 echo "playbooks zijn aangeroepen"
 echo "einde van het script"
-
