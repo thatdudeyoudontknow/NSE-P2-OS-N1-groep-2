@@ -35,7 +35,7 @@
           allow ^10.6.0.135$
           host_name docker
 
-          - name: Configure syslog-ng
+      - name: Configure syslog-ng
         blockinfile:
           path: /etc/syslog-ng/syslog-ng.conf
           marker: "# {mark} ANSIBLE MANAGED BLOCK - syslog-ng"
