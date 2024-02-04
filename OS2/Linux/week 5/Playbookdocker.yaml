@@ -15,7 +15,7 @@
         - virtualenv
         - python3-setuptools
         - syslog-ng
-        
+
     - name: Add Docker GPG apt Key
       apt_key:
         url: https://download.docker.com/linux/ubuntu/gpg
@@ -72,7 +72,7 @@
         var: log_output.stdout_lines
    
     - name: Configure Docker logging
-      community.docker.docker_logging:
+      docker_logging:
         log_driver: syslog
         log_options:
           syslog-address: "tcp://10.6.0.5:514"
