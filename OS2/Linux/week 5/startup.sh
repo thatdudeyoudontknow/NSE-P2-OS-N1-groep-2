@@ -57,7 +57,7 @@ echo "priv key wordpress op unix getjubet"
 
 
 #private key van docker
-url_docker="https://github.com/thatdudeyoudontknow/NSE-P2-OS-N1-groep-2/raw/main/OS2/Linux/week%204/new_keys/pri_docker"
+url_docker="https://raw.githubusercontent.com/thatdudeyoudontknow/NSE-P2-OS-N1-groep-2/main/OS2/Linux/week%204/new_keys/priv%20managed1"
 
 # Dit is waar de id_rsa_docker file staat
 cd /home/localadmin/.ssh || exit
