@@ -75,10 +75,10 @@
 
 
 
-      - name: Configure Docker logging
-        docker_logging:
-          log_driver: syslog
-          log_opts:
-            syslog-address: "tcp://10.6.0.5:514"
-            syslog-facility: local0
-          containers: all
+    - name: Configure Docker logging
+      docker_logging:
+        log_driver: syslog
+        log_opts:
+          syslog-address: "tcp://10.6.0.5:514"
+          syslog-facility: local0
+        containers: all
