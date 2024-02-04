@@ -33,10 +33,10 @@
         block: |
 
           [docker]
-                  address 10.6.0.100
+                  address 10.6.0.136
 
           [wordpress]        
-                  address 10.6.0.101
+                  address 10.6.0.137
                   
     - name: permission munin
       shell: sed -i 's/Require local/Require all granted/g' /etc/munin/apache24.conf && sed -i 's/Options None/Options FollowSymLinks SymLinksIfOwnerMatch/g' /etc/munin/apache24.conf

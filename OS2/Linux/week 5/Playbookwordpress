@@ -1,5 +1,5 @@
-- name: Configure syslog-ng, Apache2 & munin-node
-  hosts: man2
+- name: Configure syslog-ng, Apache2 & munin-node op wordpress
+  hosts: docker_host
   become: true
 
   tasks:
@@ -32,8 +32,8 @@
         marker: "# {mark} Ansible Managed Node - syslog-ng"
         block: |
 
-          allow ^10.6.0.101$
-          host_name wordpress
+          allow ^10.6.0.135$
+          host_name docker
 
     - name: Configureer syslog-ng
       blockinfile:
@@ -46,7 +46,7 @@
             file("/var/log/apache2/error.log"  flags(no-parse));
           };
           destination d_net {
-            tcp("10.6.0.5" port(514));
+            tcp("10.6.0.135" port(514));
           };
 
           destination d_logs {
