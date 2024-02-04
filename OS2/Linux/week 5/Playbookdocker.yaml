@@ -71,10 +71,11 @@
         var: log_output.stdout_lines
    
     - name: Configure Docker logging
-      docker_logging:
-        log_driver: syslog
-        log_options:
-          syslog-address: "tcp://10.6.0.5:514"
-          syslog-facility: local0
-        containers: all
+    community.docker.docker_logging:
+      log_driver: syslog
+      log_options:
+        syslog-address: "tcp://10.6.0.5:514"
+        syslog-facility: local0
+      containers: all
+
 
