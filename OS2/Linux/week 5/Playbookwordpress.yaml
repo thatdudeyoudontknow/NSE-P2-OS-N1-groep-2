@@ -42,10 +42,10 @@
         block: |
           source s_local {
             
-            file("/var/log/apache2/access.log" flags(no-parse));
-            file("/var/log/apache2/error.log" flags(no-parse));
-            file("/var/log/munin/munin-node.log" flags(no-parse));
-            file("/var/log/munin/munin-update.log" flags(no-parse));
+            file("/var/log/apache2/access.log" flags(no-parse) persist-name("s_access"));
+            file("/var/log/apache2/error.log" flags(no-parse) persist-name("s_error"));
+            file("/var/log/munin/munin-node.log" flags(no-parse) persist-name("s_munin_node"));
+            file("/var/log/munin/munin-update.log" flags(no-parse) persist-name("s_munin_update"));
             file("/var/log/syslog" flags(no-parse));
           };
           destination d_net {
@@ -84,7 +84,7 @@
           log {
             source(s_src);
             destination(d_net);
-              };
+          };
       
   handlers:
     - name: Restart Apache2
