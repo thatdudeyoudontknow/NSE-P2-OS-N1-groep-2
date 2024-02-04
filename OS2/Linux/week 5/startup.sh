@@ -25,24 +25,31 @@ ssh-add /home/localadmin/.ssh/id_rsa_wordpress
 ssh-add /home/localadmin/.ssh/id_rsa_docker
 
 # inhoud van de hosts file
+
+# Installeer pip
+sudo apt-get install python3-pip -y
+
+# Inhoud van de hostsfile
 hosts_inhoud="[servers]
-wordpress_host ansible_host=10.6.0.100
+wordpress_host=10.6.0.100
 wordpress_host ansible_ssh_private_key_file=~/.ssh/id_rsa_wordpress
-wordpress_host ansible_python_interpreter=/usr/bin/python3
-docker_host ansible_host=10.6.0.136
+wordpress_host ansible_python_interperter=/usr/bin/python3
+docker_host=10.6.0.136
 docker_host ansible_ssh_private_key_file=~/.ssh/id_rsa_docker
-docker_host ansible_python_interpreter=/usr/bin/python3"
+docker_host ansible_python_interperter=/usr/bin/python3"
 
-inventory_file="/etc/ansible/hosts"
+# Dit is waar de hostsfile staat
+hosts_bestand="/etc/ansible/hosts"
 
-# Controleer of de hosts al in het inventory-bestand staan
-if grep -q "$hosts_inhoud" "$inventory_file"; then
-    echo "De hosts zijn al toegevoegd aan het inventory-bestand."
+# Controleer of de gewenste inhoud al aanwezig is in de hostsfile
+if sudo grep -qF "$hosts_inhoud" "$hosts_bestand"; then
+    echo "De gewenste inhoud is al aanwezig in het hosts-bestand."
 else
-    # Voeg de hosts toe aan het inventory-bestand
-    echo "$hosts_inhoud" >> "$inventory_file"
-    echo "De hosts zijn succesvol toegevoegd aan het inventory-bestand."
+    # Voeg de gewenste inhoud toe aan het hosts-bestand met sudo-rechten
+    echo "$hosts_inhoud" | sudo tee -a "$hosts_bestand" > /dev/null
+    echo "Inhoud succesvol toegevoegd aan het hosts-bestand."
 fi
+
 
 
 #private key van wordpress
