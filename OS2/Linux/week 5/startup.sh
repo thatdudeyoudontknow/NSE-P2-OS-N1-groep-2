@@ -94,16 +94,23 @@ sudo ansible-playbook /etc/ansible/ansible_quickstart/Playbookmain.yaml
 sudo ansible-playbook /etc/ansible/ansible_quickstart/Playbookdocker.yaml
 sudo ansible-playbook /etc/ansible/ansible_quickstart/Playbookwordpress.yaml
 
-# mapje klonen waar php wordpress in staat
-github_repo="https://github.com/thatdudeyoudontknow/NSE-P2-OS-N1-groep-2/tree/main/OS2/Linux/week%205/mapie"
-# hierin komt die te staan
-clone_directory="/home/localadmin"
-# hier gaat die hem klonen
-git clone "$github_repo" "$clone_directory"
-# klein berichtje dat het is gelukt. 
-echo "Repository is gekloond naar $clone_directory"
+# GitHub-map URL
+github_map_url="https://github.com/thatdudeyoudontknow/NSE-P2-OS-N1-groep-2/trunk/OS2/Linux/week%205/mapie"
 
-sudo ansible-playbook /home/mapie/playbook.yaml
+# Directory waar de map moet worden uitgepakt
+destination_directory="/home/localadmin/mapie"
+
+# Haal alleen de map op vanaf GitHub
+svn export "$github_map_url" "$destination_directory"
+
+# Optioneel: Voer andere bewerkingen uit na het ophalen van de map, indien nodig
+# Bijvoorbeeld: Installeer vereiste afhankelijkheden, configureer de applicatie, voer tests uit, enz.
+
+# Laat een bericht zien om aan te geven dat het ophalen is voltooid
+echo "Mapie is opgehaald naar $destination_directory"
+
+sudo ansible-playbook /home/localadmin/mapie/playbook.yaml
+
 
 echo "playbooks zijn aangeroepen"
 echo "einde van het script"
