@@ -69,3 +69,22 @@
     - name: Display log output
       debug:
         var: log_output.stdout_lines
+    - name: Configure Docker to use syslog-ng
+      copy:
+        dest: /etc/docker/daemon.json
+        content: |
+          {
+            "log-driver": "syslog",
+            "log-opts": {
+              "syslog-address": "tcp://10.6.0.5:514",
+              "tag": "{{.ImageName}}/{{.Name}}/{{.ID}}"
+            }
+          }
+        owner: root
+        group: root
+        mode: '0644'
+
+    - name: Restart Docker service
+      systemd:
+        name: docker
+        state: restarted
