@@ -33,7 +33,7 @@ docker_host ansible_host=10.6.0.136
 docker_host ansible_ssh_private_key_file=~/.ssh/id_rsa_docker
 docker_host ansible_python_interpreter=/usr/bin/python3"
 
-inventory_file="/path/to/your/inventory"
+inventory_file="/etc/ansible/hosts"
 
 # Controleer of de hosts al in het inventory-bestand staan
 if grep -q "$hosts_inhoud" "$inventory_file"; then
