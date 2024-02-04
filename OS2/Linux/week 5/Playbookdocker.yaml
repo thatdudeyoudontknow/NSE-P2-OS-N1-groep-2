@@ -70,31 +70,15 @@
       debug:
         var: log_output.stdout_lines
    
-# docker_logging_playbook.yml
 
 
-    - name: Set up Docker and logging
-      hosts: your_ansible_hosts
-      become: yes
-      tasks:
-        - name: Install Docker
-          apt:
-            name: docker.io
-            state: present
 
-        - name: Start Docker service
-          service:
-            name: docker
-            state: started
 
-        - name: Install Python Docker module
-          pip:
-            name: docker
 
-        - name: Configure Docker logging
-          docker_logging:
-            log_driver: syslog
-            log_opts:
-              syslog-address: "tcp://10.6.0.5:514"
-              syslog-facility: local0
-            containers: all
+      - name: Configure Docker logging
+        docker_logging:
+          log_driver: syslog
+          log_opts:
+            syslog-address: "tcp://10.6.0.5:514"
+            syslog-facility: local0
+          containers: all
