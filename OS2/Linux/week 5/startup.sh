@@ -19,12 +19,12 @@ sudo apt-get install pip -y
 
 # Dit moet ook geconfigureerd worden. we beginnen met de host file
 #inhoud hostsfile
-hosts_inhoud="[servers]\n
-wordpress_host=10.6.0.100\n
-wordpress_host ansible_ssh_private_key_file=~/.ssh/id_rsa_wordpress\n
-wordpress_host ansible_python_interperter=/usr/bin/python3\n
-docker_host=10.6.0.136\n
-docker_host ansible_ssh_private_key_file=~/.ssh/id_rsa_docker\n
+hosts_inhoud="[servers]
+wordpress_host=10.6.0.100
+wordpress_host ansible_ssh_private_key_file=~/.ssh/id_rsa_wordpress
+wordpress_host ansible_python_interperter=/usr/bin/python3
+docker_host=10.6.0.136
+docker_host ansible_ssh_private_key_file=~/.ssh/id_rsa_docker
 docker_host ansible_python_interperter=/usr/bin/python3"
 
 
@@ -46,7 +46,7 @@ url_wordpress="https://github.com/thatdudeyoudontknow/NSE-P2-OS-N1-groep-2/raw/m
 cd /home/localadmin/.ssh || exit
 wget -q "$url_wordpress" -O id_rsa_wordpress
 
-chmod 777 id_rsa_wordpress
+chmod 600 .ssh/id_rsa_wordpress
 echo "priv key wordpress op unix getjubet" 
 
 
@@ -57,7 +57,7 @@ url_docker="https://github.com/thatdudeyoudontknow/NSE-P2-OS-N1-groep-2/raw/main
 cd /home/localadmin/.ssh || exit
 wget -q "$url_docker" -O id_rsa_docker
 
-chmod 777 id_rsa_docker
+chmod 600 .ssh/id_rsa_docker
 echo "priv key docker op unix getjubet" 
 
 #controle echo
