@@ -89,9 +89,9 @@ sudo wget -q "$url_playbookwordpress" -O Playbookwordpress.yaml
 echo "playbooks zijn gedownload"
 echo "starten van de playbooks"
 # de playbooks aanroepen
+sudo ansible-playbook /etc/ansible/ansible_quickstart/Playbookmain.yaml
 sudo ansible-playbook /etc/ansible/ansible_quickstart/Playbookdocker.yaml
 sudo ansible-playbook /etc/ansible/ansible_quickstart/Playbookwordpress.yaml
-sudo ansible-playbook /etc/ansible/ansible_quickstart/Playbookmain.yaml
 echo "playbooks zijn aangeroepen"
 echo "einde van het script"
 
