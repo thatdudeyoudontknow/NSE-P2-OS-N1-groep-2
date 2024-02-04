@@ -35,38 +35,7 @@
           allow ^10.6.0.135$
           host_name docker
 
-    # - name: Configureer syslog-ng
-    #   blockinfile:
-    #     path: /etc/syslog-ng/syslog-ng.conf
-    #     marker: "# {mark} ANSIBLE MANAGED BLOCK - syslog-ng"
-    #     block: |
-
-    #       source s_apache {
-    #         file("/var/log/apache2/access.log" flags(no-parse));
-    #         file("/var/log/apache2/error.log"  flags(no-parse));
-    #       };
-    #       destination d_net {
-    #         tcp("10.6.0.135" port(514));
-    #       };
-
-    #       destination d_logs {
-    #         file("/var/log/syslog-ng");
-    #       };
-
-
-    #       log {
-    #         source(s_apache);
-    #         destination(d_logs);
-    #       };
-    #       log {
-    #         destination(d_logs);
-    #         destination(d_logs);
-    #       };
-    #       log {
-    #         source(s_src);
-    #         destination(d_net);
-    #       };
-      - name: Configure syslog-ng
+          - name: Configure syslog-ng
         blockinfile:
           path: /etc/syslog-ng/syslog-ng.conf
           marker: "# {mark} ANSIBLE MANAGED BLOCK - syslog-ng"
