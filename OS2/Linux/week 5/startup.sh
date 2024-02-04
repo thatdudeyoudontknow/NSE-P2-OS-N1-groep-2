@@ -8,6 +8,9 @@ sudo apt-get upgrade -y
 #nano installeren
 sudo apt-get install nano -y
 
+# voor het de github later
+sudo apt install subversion -y
+
 #map ansible/ansible aanmaken
 sudo apt-add-repository ppa:ansible/ansible -y
 
