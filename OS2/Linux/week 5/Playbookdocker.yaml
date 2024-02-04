@@ -70,26 +70,31 @@
       debug:
         var: log_output.stdout_lines
    
-    - name: Set Docker tag
-      set_fact:
-        docker_tag: "{{ '{{' }}.ImageName{{ '}}' }}/{{ '{{' }}.Name{{ '}}' }}/{{ '{{' }}.ID{{ '}}' }}"
+# docker_logging_playbook.yml
 
-    - name: Configure Docker to use syslog-ng
-      copy:
-        dest: /etc/docker/daemon.json
-        content: |
-          {
-            "log-driver": "syslog",
-            "log-opts": {
-              "syslog-address": "tcp://10.6.0.5:514",
-              "tag": "{{ docker_tag }}"
-            }
-          }
-        owner: root
-        group: root
-        mode: '0644'
 
-    - name: Restart Docker service
-      systemd:
-        name: docker
-        state: restarted
+    - name: Set up Docker and logging
+      hosts: your_ansible_hosts
+      become: yes
+      tasks:
+        - name: Install Docker
+          apt:
+            name: docker.io
+            state: present
+
+        - name: Start Docker service
+          service:
+            name: docker
+            state: started
+
+        - name: Install Python Docker module
+          pip:
+            name: docker
+
+        - name: Configure Docker logging
+          docker_logging:
+            log_driver: syslog
+            log_opts:
+              syslog-address: "tcp://10.6.0.5:514"
+              syslog-facility: local0
+            containers: all
