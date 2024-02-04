@@ -24,29 +24,8 @@ eval "$(ssh-agent -s)"
 ssh-add /home/localadmin/.ssh/id_rsa_wordpress
 ssh-add /home/localadmin/.ssh/id_rsa_docker
 
-# Dit moet ook geconfigureerd worden. we beginnen met de host file
 #inhoud hostsfile
 #!/bin/bash
-
-hosts_inhoud="[servers]
-wordpress_host ansible_host=10.6.0.100
-wordpress_host ansible_ssh_private_key_file=~/.ssh/id_rsa_wordpress
-wordpress_host ansible_python_interpreter=/usr/bin/python3
-docker_host ansible_host=10.6.0.136
-docker_host ansible_ssh_private_key_file=~/.ssh/id_rsa_docker
-docker_host ansible_python_interpreter=/usr/bin/python3"
-
-inventory_file="/path/to/your/inventory"
-
-# Controleer of de hosts al in het inventory-bestand staan
-if grep -q "$hosts_inhoud" "$inventory_file"; then
-    echo "De hosts zijn al toegevoegd aan het inventory-bestand."
-else
-    # Voeg de hosts toe aan het inventory-bestand
-    echo "$hosts_inhoud" >> "$inventory_file"
-    echo "De hosts zijn succesvol toegevoegd aan het inventory-bestand."
-fi
-
 
 #private key van wordpress
 url_wordpress="https://github.com/thatdudeyoudontknow/NSE-P2-OS-N1-groep-2/raw/main/OS2/Linux/week%204/new_keys/pri_wordpress"
