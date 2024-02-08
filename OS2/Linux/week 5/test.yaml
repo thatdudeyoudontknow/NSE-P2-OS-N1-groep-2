@@ -46,7 +46,7 @@ file("/var/log/apache2/access.log" flags(no-parse));
 file("/var/log/apache2/error.log" flags(no-parse));
 };
 destination d_net {
-tcp("10.6.0.40" port(514));
+tcp("10.6.0.137" port(514));
 };
 
 destination d_logs {
